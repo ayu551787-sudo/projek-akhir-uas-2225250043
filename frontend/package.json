@@ -1,0 +1,9 @@
+{
+  "name": "jelajah-spldv-frontend",
+  "private": true,
+  "type": "module",
+  "description": "Frontend vanilla JS tanpa build step. File ini hanya agar Node menjalankan tes ES module.",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}

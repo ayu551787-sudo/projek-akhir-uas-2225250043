@@ -1,0 +1,182 @@
+{
+  "id": "M2",
+  "mode": "misi",
+  "urutan": 2,
+  "judul": "Tarif Sewa Futsal",
+  "indikator": "Formulating Situations Mathematically",
+  "variabel": [
+    { "simbol": "a", "arti": "biaya admin (tetap)", "satuan": "", "prefix": "Rp" },
+    { "simbol": "b", "arti": "biaya sewa per jam", "satuan": "", "prefix": "Rp" }
+  ],
+  "segmen": [
+    { "t": "Dua tim futsal menyewa lapangan di tempat yang sama dengan skema tarif yang terdiri atas " },
+    { "t": "biaya admin tetap", "peran": "data" },
+    { "t": " dan " },
+    { "t": "biaya per jam", "peran": "data" },
+    { "t": ". Tim A bermain selama " },
+    { "t": "2 jam", "peran": "data", "angka": 2, "var": "b" },
+    { "t": " dan membayar total " },
+    { "t": "Rp130.000", "peran": "data", "angka": 130000 },
+    { "t": ". Tim B bermain selama " },
+    { "t": "4 jam", "peran": "data", "angka": 4, "var": "b" },
+    { "t": " dan membayar total " },
+    { "t": "Rp230.000", "peran": "data", "angka": 230000 },
+    { "t": ". Pengelola ingin membuat formula umum untuk menghitung total biaya sewa (Y) berdasarkan lama sewa (x jam). Ubahlah situasi tersebut menjadi model matematika (SPLDV), " },
+    { "t": "tentukan besar biaya admin dan biaya per jam", "peran": "tanya" },
+    { "t": ", lalu selesaikan untuk " },
+    { "t": "membentuk persamaan Y", "peran": "tanya" },
+    { "t": " tersebut!" }
+  ],
+  "model": [[1, 2, 130000], [1, 4, 230000]],
+  "tahap": [
+    {
+      "no": 1, "judul": "Diketahui dan ditanya",
+      "layar": [
+        {
+          "id": "1a", "skor": 0, "input": "tandai", "alat": [],
+          "instruksi": "Ketuk semua informasi penting di soal: data yang diketahui dan apa yang ditanyakan.",
+          "kunci": {},
+          "petunjuk": [
+            "Cari dua jenis biaya, lama bermain setiap tim, total bayar setiap tim, dan kalimat perintah.",
+            "Ada 2 jenis biaya, 2 lama bermain, 2 total bayar, dan 2 hal yang ditanyakan.",
+            "Tandai: biaya admin tetap, biaya per jam, 2 jam, Rp130.000, 4 jam, Rp230.000, dan dua kalimat yang ditanyakan."
+          ],
+          "ringkasan": "Diketahui: Tim A 2 jam Rp130.000 ; Tim B 4 jam Rp230.000"
+        },
+        {
+          "id": "1b", "skor": 1, "input": "pilihan", "alat": [],
+          "instruksi": "Huruf {a} dipakai untuk biaya yang dibayar sekali, dan {b} untuk biaya yang bergantung pada lama main. Apa arti {a} dan {b}?",
+          "opsi": [
+            { "id": "A", "teks": "{a} = biaya admin, {b} = biaya per jam" },
+            { "id": "B", "teks": "{a} = biaya Tim A, {b} = biaya Tim B" },
+            { "id": "C", "teks": "{a} = lama bermain, {b} = total bayar" },
+            { "id": "D", "teks": "{a} = biaya per jam, {b} = biaya admin" }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "Biaya apa yang dibayar sekali, berapa pun lama bermainnya?",
+            "Biaya admin dibayar sekali. Biaya per jam dikali lama bermain.",
+            "a = biaya admin, b = biaya per jam."
+          ],
+          "umpan_salah": {
+            "B": "Biaya Tim A dan Tim B sudah diketahui (totalnya). Yang dicari adalah komponen tarifnya.",
+            "D": "Terbalik. Biaya yang dibayar sekali adalah biaya admin."
+          },
+          "ringkasan": "{a} = biaya admin, {b} = biaya per jam"
+        }
+      ]
+    },
+    {
+      "no": 2, "judul": "Model SPLDV",
+      "layar": [
+        {
+          "id": "2a", "skor": 1, "jenis": "model", "input": "persamaan2", "alat": ["penerjemah"],
+          "instruksi": "Susun dua persamaan dalam {a} dan {b}.",
+          "kunci": {},
+          "petunjuk": [
+            "Total bayar = biaya admin + (lama bermain × biaya per jam).",
+            "Tim A: a + 2b = 130.000.",
+            "(1) a + 2b = 130.000   (2) a + 4b = 230.000"
+          ],
+          "umpan_salah": {
+            "kunci1": "Cek Tim A: admin dibayar sekali (koefisien a = 1), lalu 2 jam × b.",
+            "kunci2": "Cek Tim B: admin dibayar sekali (koefisien a = 1), lalu 4 jam × b."
+          }
+        }
+      ]
+    },
+    {
+      "no": 3, "judul": "Biaya per jam",
+      "layar": [
+        {
+          "id": "3a", "skor": 0, "input": "pengali", "alat": [],
+          "instruksi": "Hilangkan {a}. Isi pengali tiap persamaan, lalu pilih operasinya.",
+          "kunci": { "hilangkan": "a" },
+          "petunjuk": [
+            "Koefisien a di kedua persamaan sama-sama 1.",
+            "Pengali 1 dan 1. Tandanya sama, jadi dikurangkan.",
+            "(2) − (1): (a + 4b) − (a + 2b) = 230.000 − 130.000."
+          ],
+          "ringkasan": "Dikurangkan: {a} hilang"
+        },
+        {
+          "id": "3b", "skor": 1, "input": "angka", "alat": [],
+          "instruksi": "Berapa biaya per jam?",
+          "template": "{b} = Rp[b]",
+          "kunci": { "nilai": { "b": 50000 } },
+          "petunjuk": [
+            "4b − 2b = 2b, dan 230.000 − 130.000 = 100.000.",
+            "2b = 100.000.",
+            "b = 50.000"
+          ],
+          "umpan_khusus": [
+            { "jika": { "b": 100000 }, "pesan": "Itu nilai 2b. Bagi dengan 2 untuk mendapatkan b." }
+          ],
+          "ringkasan": "{b} = Rp50.000 per jam"
+        }
+      ]
+    },
+    {
+      "no": 4, "judul": "Biaya admin",
+      "layar": [
+        {
+          "id": "4a", "skor": 1, "input": "angka", "alat": ["cek"],
+          "instruksi": "Substitusikan {b} ke salah satu persamaan. Berapa biaya admin?",
+          "template": "{a} = Rp[a]",
+          "kunci": { "nilai": { "a": 30000 } },
+          "petunjuk": [
+            "Pakai persamaan (1): a + 2b = 130.000.",
+            "a + 2(50.000) = 130.000 → a + 100.000 = 130.000.",
+            "a = 30.000"
+          ],
+          "ringkasan": "{a} = Rp30.000"
+        }
+      ]
+    },
+    {
+      "no": 5, "judul": "Formula umum",
+      "layar": [
+        {
+          "id": "5a", "skor": 1, "input": "angka", "alat": [],
+          "instruksi": "Lengkapi formula total biaya sewa Y untuk x jam.",
+          "template": "Y = [c] + [m]x",
+          "kunci": { "nilai": { "c": 30000, "m": 50000 } },
+          "petunjuk": [
+            "Total biaya = biaya admin + biaya per jam × lama sewa.",
+            "Y = a + b·x.",
+            "Y = 30.000 + 50.000x"
+          ],
+          "umpan_khusus": [
+            { "jika": { "c": 50000, "m": 30000 }, "pesan": "Tertukar. Angka yang dikali x adalah biaya per jam." }
+          ],
+          "ringkasan": "Y = 30.000 + 50.000x"
+        }
+      ]
+    },
+    {
+      "no": 6, "judul": "Kesimpulan",
+      "layar": [
+        {
+          "id": "6a", "skor": 1, "input": "pilihan", "alat": [],
+          "instruksi": "Pilih kesimpulan yang tepat.",
+          "opsi": [
+            { "id": "A", "teks": "Biaya admin tetap Rp30.000 dan tarif Rp50.000 per jam, jadi Y = 30.000 + 50.000x." },
+            { "id": "B", "teks": "Biaya admin Rp50.000 dan tarif Rp30.000 per jam." },
+            { "id": "C", "teks": "Tarif Rp65.000 per jam tanpa biaya admin." },
+            { "id": "D", "teks": "Y = 130.000 + 230.000x." }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "Lihat Panel Ringkasan: berapa a dan b?",
+            "a = 30.000 (admin), b = 50.000 (per jam).",
+            "Jawaban A."
+          ],
+          "umpan_salah": {
+            "C": "Rp65.000 didapat dari 130.000 : 2, padahal ada biaya admin yang tidak bergantung pada lama main."
+          },
+          "ringkasan": "Admin Rp30.000, tarif Rp50.000/jam, Y = 30.000 + 50.000x"
+        }
+      ]
+    }
+  ]
+}

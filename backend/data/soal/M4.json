@@ -1,0 +1,182 @@
+{
+  "id": "M4",
+  "mode": "misi",
+  "urutan": 4,
+  "judul": "Cek Hitungan Candra",
+  "indikator": "Interpreting, Applying, and Evaluating Mathematical Outcomes",
+  "variabel": [
+    { "simbol": "x", "arti": "harga 1 kg apel", "satuan": "", "prefix": "Rp" },
+    { "simbol": "y", "arti": "harga 1 kg jeruk", "satuan": "", "prefix": "Rp" }
+  ],
+  "segmen": [
+    { "t": "Budi membeli " },
+    { "t": "3 kg apel", "peran": "data", "angka": 3, "var": "x" },
+    { "t": " dan " },
+    { "t": "2 kg jeruk", "peran": "data", "angka": 2, "var": "y" },
+    { "t": " dengan harga " },
+    { "t": "Rp130.000", "peran": "data", "angka": 130000 },
+    { "t": ". Di kios yang sama, Ani membeli " },
+    { "t": "2 kg apel", "peran": "data", "angka": 2, "var": "x" },
+    { "t": " dan " },
+    { "t": "5 kg jeruk", "peran": "data", "angka": 5, "var": "y" },
+    { "t": " dengan harga " },
+    { "t": "Rp160.000", "peran": "data", "angka": 160000 },
+    { "t": ". Pembeli lain, Candra, menghitung bahwa harga " },
+    { "t": "1 kg apel adalah Rp30.000", "peran": "data", "angka": 30000 },
+    { "t": " dan " },
+    { "t": "1 kg jeruk adalah Rp20.000", "peran": "data", "angka": 20000 },
+    { "t": ". Ia menyimpulkan jika ia memiliki " },
+    { "t": "uang Rp100.000", "peran": "data", "angka": 100000 },
+    { "t": ", ia bisa membeli " },
+    { "t": "2 kg apel dan 2 kg jeruk", "peran": "data", "angka": 2 },
+    { "t": ". " },
+    { "t": "Apakah kamu setuju dengan analisis dan kesimpulan Candra?", "peran": "tanya" },
+    { "t": " Jelaskan alasanmu berdasarkan perhitungan matematis yang benar!" }
+  ],
+  "model": [[3, 2, 130000], [2, 5, 160000]],
+  "tahap": [
+    {
+      "no": 1, "judul": "Model SPLDV",
+      "layar": [
+        {
+          "id": "1a", "skor": 1, "jenis": "model", "input": "persamaan2", "alat": ["penerjemah"],
+          "instruksi": "Jangan langsung percaya angka Candra. Misalkan {x} = harga 1 kg apel dan {y} = harga 1 kg jeruk, lalu susun persamaan dari pembelian Budi dan Ani.",
+          "kunci": {},
+          "petunjuk": [
+            "Satu pembeli menghasilkan satu persamaan. Data Candra belum dipakai di sini.",
+            "Budi: 3 kg apel dan 2 kg jeruk seharga Rp130.000, jadi 3x + 2y = 130.000.",
+            "(1) 3x + 2y = 130.000   (2) 2x + 5y = 160.000"
+          ],
+          "umpan_salah": {
+            "kunci1": "Cek pembelian Budi: berapa kg apel, berapa kg jeruk, dan berapa harganya?",
+            "kunci2": "Cek pembelian Ani: berapa kg apel, berapa kg jeruk, dan berapa harganya?"
+          }
+        }
+      ]
+    },
+    {
+      "no": 2, "judul": "Harga jeruk",
+      "layar": [
+        {
+          "id": "2a", "skor": 0, "input": "pengali", "alat": [],
+          "instruksi": "Hilangkan {x}. Isi pengali tiap persamaan, lalu pilih operasinya.",
+          "kunci": { "hilangkan": "x" },
+          "petunjuk": [
+            "Koefisien x adalah 3 dan 2. Berapa KPK-nya?",
+            "KPK 6: persamaan (1) × 2 dan persamaan (2) × 3. Tandanya sama, jadi dikurangkan.",
+            "6x + 4y = 260.000 dan 6x + 15y = 480.000, lalu dikurangkan."
+          ],
+          "ringkasan": "(1) × 2, (2) × 3, dikurangkan: {x} hilang"
+        },
+        {
+          "id": "2b", "skor": 1, "input": "angka", "alat": [],
+          "instruksi": "Hitung harga 1 kg jeruk.",
+          "template": "{y} = Rp[y]",
+          "kunci": { "nilai": { "y": 20000 } },
+          "petunjuk": [
+            "(6x + 15y) − (6x + 4y) = 480.000 − 260.000.",
+            "11y = 220.000.",
+            "y = 20.000"
+          ],
+          "ringkasan": "{y} = Rp20.000 per kg"
+        }
+      ]
+    },
+    {
+      "no": 3, "judul": "Harga apel dan evaluasi",
+      "layar": [
+        {
+          "id": "3a", "skor": 1, "input": "angka", "alat": ["cek"],
+          "instruksi": "Substitusikan {y} ke salah satu persamaan. Berapa harga 1 kg apel?",
+          "template": "{x} = Rp[x]",
+          "kunci": { "nilai": { "x": 30000 } },
+          "petunjuk": [
+            "Pakai persamaan (1): 3x + 2y = 130.000.",
+            "3x + 2(20.000) = 130.000 → 3x = 90.000.",
+            "x = 30.000"
+          ],
+          "ringkasan": "{x} = Rp30.000 per kg"
+        },
+        {
+          "id": "3b", "skor": 0, "input": "pilihan", "alat": [],
+          "instruksi": "Apakah harga satuan yang dihitung Candra benar?",
+          "opsi": [
+            { "id": "ya", "teks": "Ya, apel Rp30.000/kg dan jeruk Rp20.000/kg sesuai hitunganku." },
+            { "id": "tidak", "teks": "Tidak, hitungan Candra berbeda dengan hitunganku." }
+          ],
+          "kunci": { "pilihan": "ya" },
+          "petunjuk": [
+            "Bandingkan hasil x dan y-mu dengan angka Candra.",
+            "x = 30.000 dan y = 20.000. Candra: apel 30.000, jeruk 20.000.",
+            "Ya, sama."
+          ],
+          "ringkasan": "Harga satuan Candra benar"
+        }
+      ]
+    },
+    {
+      "no": 4, "judul": "Biaya belanja Candra",
+      "layar": [
+        {
+          "id": "4a", "skor": 1, "input": "angka", "alat": [],
+          "instruksi": "Hitung biaya 2 kg apel + 2 kg jeruk.",
+          "template": "Biaya = Rp[total]",
+          "kunci": { "nilai": { "total": 100000 } },
+          "petunjuk": [
+            "Biaya = 2x + 2y.",
+            "2(30.000) + 2(20.000) = 60.000 + 40.000.",
+            "Rp100.000"
+          ],
+          "ringkasan": "Biaya 2 kg apel + 2 kg jeruk = Rp100.000"
+        }
+      ]
+    },
+    {
+      "no": 5, "judul": "Membandingkan",
+      "layar": [
+        {
+          "id": "5a", "skor": 1, "input": "pilihan", "alat": [],
+          "instruksi": "Bandingkan biaya dengan uang Candra (Rp100.000).",
+          "opsi": [
+            { "id": "kurang", "teks": "Uang Candra kurang" },
+            { "id": "pas", "teks": "Uang Candra pas (cukup)" },
+            { "id": "lebih", "teks": "Uang Candra bersisa" }
+          ],
+          "kunci": { "pilihan": "pas" },
+          "petunjuk": [
+            "Biayanya Rp100.000. Uang Candra Rp100.000.",
+            "Rp100.000 ≤ Rp100.000.",
+            "Uangnya pas (cukup)."
+          ],
+          "ringkasan": "Rp100.000 ≤ Rp100.000: uang pas"
+        }
+      ]
+    },
+    {
+      "no": 6, "judul": "Kesimpulan",
+      "layar": [
+        {
+          "id": "6a", "skor": 1, "input": "pilihan", "teks_opsional": true, "alat": [],
+          "instruksi": "Apakah kamu setuju dengan Candra? Pilih jawaban dan alasan yang tepat. Kamu juga boleh menulis alasan dengan kata-katamu sendiri.",
+          "opsi": [
+            { "id": "A", "teks": "Setuju. Harga satuan Candra tepat (apel Rp30.000/kg, jeruk Rp20.000/kg) dan total 2 kg apel + 2 kg jeruk tepat Rp100.000, jadi uangnya cukup." },
+            { "id": "B", "teks": "Tidak setuju, karena uang harus lebih besar daripada harga barang." },
+            { "id": "C", "teks": "Setuju, karena Candra juga pembeli di kios itu." },
+            { "id": "D", "teks": "Tidak setuju, karena Rp130.000 + Rp160.000 lebih dari Rp100.000." }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "Alasan yang kuat memakai hasil hitunganmu di tahap sebelumnya.",
+            "Harga satuan Candra benar dan totalnya tepat sama dengan uangnya.",
+            "Jawaban A."
+          ],
+          "umpan_salah": {
+            "B": "Jika harga sama dengan uang yang dimiliki, uangnya tetap cukup (pas).",
+            "D": "Rp130.000 dan Rp160.000 adalah belanjaan Budi dan Ani, bukan Candra."
+          },
+          "ringkasan": "Setuju dengan Candra: hitungan tepat, uang pas"
+        }
+      ]
+    }
+  ]
+}

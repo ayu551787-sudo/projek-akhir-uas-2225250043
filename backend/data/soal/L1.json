@@ -1,0 +1,121 @@
+{
+  "id": "L1",
+  "mode": "latihan",
+  "urutan": 1,
+  "judul": "Latihan 1 · Soal Simbolik",
+  "indikator": "Prosedur eliminasi dan substitusi",
+  "variabel": [
+    { "simbol": "x", "arti": "nilai x", "satuan": "", "prefix": "" },
+    { "simbol": "y", "arti": "nilai y", "satuan": "", "prefix": "" }
+  ],
+  "segmen": [
+    { "t": "Tentukan nilai " },
+    { "t": "x dan y", "peran": "tanya" },
+    { "t": " dari sistem persamaan berikut:" }
+  ],
+  "persamaan_tampil": [[-1, 1, 70], [2, -1, 30]],
+  "model": [[-1, 1, 70], [2, -1, 30]],
+  "tahap": [
+    {
+      "no": 1, "judul": "Eliminasi",
+      "layar": [
+        {
+          "id": "1a", "skor": 0, "input": "pilihan", "alat": ["tips"],
+          "instruksi": "Variabel mana yang paling mudah dihilangkan (dieliminasi)?",
+          "opsi": [
+            { "id": "x", "teks": "{x}, karena koefisiennya −1 dan 2" },
+            { "id": "y", "teks": "{y}, karena koefisiennya +1 dan −1" }
+          ],
+          "kunci": { "pilihan": "y" },
+          "petunjuk": [
+            "Lihat koefisien setiap variabel di kedua persamaan.",
+            "Variabel yang koefisiennya sama besar (atau berlawanan tanda) bisa langsung hilang tanpa dikalikan.",
+            "Koefisien y adalah +1 dan −1. Jadi y paling mudah dihilangkan."
+          ],
+          "umpan_salah": { "x": "Bisa saja, tetapi koefisien x (−1 dan 2) harus disamakan dulu. Adakah yang lebih mudah?" },
+          "umpan_benar": "Tepat! Koefisien y sudah berlawanan, jadi tidak perlu dikalikan.",
+          "ringkasan": "Yang dihilangkan: {y}"
+        },
+        {
+          "id": "1b", "skor": 0, "input": "pengali", "alat": ["penyelaras"],
+          "instruksi": "Hilangkan {y}. Isi pengali tiap persamaan, lalu pilih: dijumlahkan atau dikurangkan?",
+          "kunci": { "hilangkan": "y" },
+          "petunjuk": [
+            "Koefisien y sudah sama besarnya (1). Pengalinya cukup 1 dan 1.",
+            "Perhatikan tanda: +1 dan −1 berbeda tanda. Tanda beda → jumlahkan.",
+            "Persamaan (1) × 1 dan (2) × 1, lalu dijumlahkan: (−x + y) + (2x − y) = 70 + 30."
+          ],
+          "ringkasan": "(1) + (2): {y} hilang"
+        },
+        {
+          "id": "1c", "skor": 0, "input": "angka", "alat": [],
+          "instruksi": "Jumlahkan kedua persamaan. Berapa nilai {x}?",
+          "template": "(−{x} + 2{x}) + ({y} − {y}) = 70 + 30\n{x} = [x]",
+          "kunci": { "nilai": { "x": 100 } },
+          "petunjuk": [
+            "Jumlahkan suku x: −x + 2x. Jumlahkan ruas kanan: 70 + 30.",
+            "−x + 2x = x, dan 70 + 30 = 100.",
+            "x = 100"
+          ],
+          "umpan_khusus": [
+            { "jika": { "x": 40 }, "pesan": "Kamu mengurangkan 70 − 30. Karena persamaannya dijumlahkan, ruas kanan juga dijumlahkan: 70 + 30." }
+          ],
+          "ringkasan": "{x} = 100"
+        }
+      ]
+    },
+    {
+      "no": 2, "judul": "Substitusi",
+      "layar": [
+        {
+          "id": "2a", "skor": 0, "input": "substitusi", "alat": [],
+          "instruksi": "Substitusikan {x} = 100 ke salah satu persamaan.",
+          "kunci": { "var": "x", "nilai": 100 },
+          "petunjuk": [
+            "Pilih persamaan (1): −x + y = 70. Ganti x dengan 100.",
+            "−x berarti −1 × x. Jadi −1 × 100 = −100.",
+            "−100 + y = 70"
+          ],
+          "ringkasan": "−100 + {y} = 70"
+        },
+        {
+          "id": "2b", "skor": 0, "input": "angka", "alat": ["cek"],
+          "instruksi": "Hitung nilai {y}.",
+          "template": "{y} = [y]",
+          "kunci": { "nilai": { "y": 170 } },
+          "petunjuk": [
+            "Pindahkan −100 ke ruas kanan. Ingat: saat pindah ruas, tandanya berubah.",
+            "−100 menjadi +100 di ruas kanan: y = 70 + 100.",
+            "y = 170"
+          ],
+          "umpan_khusus": [
+            { "jika": { "y": -30 }, "pesan": "Perhitungannya terbalik: −100 pindah ke ruas kanan menjadi +100, bukan −100. Jadi y = 70 + 100." },
+            { "jika": { "y": 30 }, "pesan": "Hampir! Saat −100 pindah ke ruas kanan, tandanya berubah menjadi +100. Jadi y = 70 + 100." }
+          ],
+          "ringkasan": "{y} = 170"
+        }
+      ]
+    },
+    {
+      "no": 3, "judul": "Periksa",
+      "layar": [
+        {
+          "id": "3a", "skor": 0, "input": "pilihan", "alat": ["cek"],
+          "instruksi": "Pakai alat Cek Jawaban. Apakah {x} = 100 dan {y} = 170 memenuhi kedua persamaan?",
+          "opsi": [
+            { "id": "ya", "teks": "Ya, kedua persamaan terpenuhi" },
+            { "id": "tidak", "teks": "Tidak, ada persamaan yang tidak terpenuhi" }
+          ],
+          "kunci": { "pilihan": "ya" },
+          "petunjuk": [
+            "Tekan tombol Cek Jawaban, lalu isi x = 100 dan y = 170.",
+            "Persamaan (1): −100 + 170 = 70. Persamaan (2): 2(100) − 170 = 30.",
+            "Ya, keduanya terpenuhi."
+          ],
+          "umpan_benar": "Bagus! Membiasakan diri memeriksa jawaban membuatmu lebih yakin.",
+          "ringkasan": "Terbukti: −100 + 170 = 70 ✓ dan 200 − 170 = 30 ✓"
+        }
+      ]
+    }
+  ]
+}

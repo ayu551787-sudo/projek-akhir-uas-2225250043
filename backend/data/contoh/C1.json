@@ -1,0 +1,72 @@
+{
+  "id": "C1",
+  "urutan": 1,
+  "judul": "Contoh 1 · Pulpen dan Penghapus",
+  "deskripsi": "Metode gabungan: eliminasi lalu substitusi",
+  "variabel": ["x", "y"],
+  "soal": "Dina membeli 2 pulpen dan 3 penghapus seharga Rp13.000. Eka membeli 3 pulpen dan 1 penghapus seharga Rp9.000. Berapa harga 1 pulpen dan 1 penghapus?",
+  "langkah": [
+    {
+      "judul": "1. Tandai informasi penting",
+      "baris": [
+        "Diketahui: Dina → 2 pulpen, 3 penghapus, Rp13.000.",
+        "Diketahui: Eka → 3 pulpen, 1 penghapus, Rp9.000.",
+        "Ditanya: harga 1 pulpen dan harga 1 penghapus."
+      ]
+    },
+    {
+      "judul": "2. Tentukan variabel",
+      "baris": [
+        "Misalkan {x} = harga 1 pulpen.",
+        "Misalkan {y} = harga 1 penghapus.",
+        "Banyak barang menjadi koefisien. Harga total menjadi konstanta."
+      ]
+    },
+    {
+      "judul": "3. Susun model matematika",
+      "baris": [
+        "Dina: 2{x} + 3{y} = 13.000  … persamaan (1)",
+        "Eka:  3{x} + {y} = 9.000  … persamaan (2)"
+      ]
+    },
+    {
+      "judul": "4. Pilih variabel yang dihilangkan",
+      "baris": [
+        "Koefisien {y}: 3 dan 1. KPK-nya 3.",
+        "Persamaan (1) × 1 → 2{x} + 3{y} = 13.000",
+        "Persamaan (2) × 3 → 9{x} + 3{y} = 27.000",
+        "Tanda koefisien {y} sama (+ dan +) → kurangkan."
+      ]
+    },
+    {
+      "judul": "5. Eliminasi",
+      "baris": [
+        "(9{x} + 3{y}) − (2{x} + 3{y}) = 27.000 − 13.000",
+        "7{x} = 14.000",
+        "{x} = 2.000"
+      ]
+    },
+    {
+      "judul": "6. Substitusi",
+      "baris": [
+        "Pakai persamaan (2) karena koefisien {y} = 1:",
+        "3(2.000) + {y} = 9.000",
+        "6.000 + {y} = 9.000",
+        "{y} = 9.000 − 6.000 = 3.000"
+      ]
+    },
+    {
+      "judul": "7. Cek jawaban",
+      "baris": [
+        "Persamaan (1): 2(2.000) + 3(3.000) = 4.000 + 9.000 = 13.000 ✓",
+        "Persamaan (2): 3(2.000) + 3.000 = 6.000 + 3.000 = 9.000 ✓"
+      ]
+    },
+    {
+      "judul": "8. Jawab pertanyaan soal",
+      "baris": [
+        "Harga 1 pulpen Rp2.000 dan harga 1 penghapus Rp3.000."
+      ]
+    }
+  ]
+}

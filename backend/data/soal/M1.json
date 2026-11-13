@@ -1,0 +1,179 @@
+{
+  "id": "M1",
+  "mode": "misi",
+  "urutan": 1,
+  "judul": "Toko Mana yang Hemat?",
+  "indikator": "Mathematical Reasoning",
+  "variabel": [
+    { "simbol": "x", "arti": "harga 1 buku tulis di Toko A", "satuan": "", "prefix": "Rp" },
+    { "simbol": "y", "arti": "harga 1 pensil di Toko A", "satuan": "", "prefix": "Rp" }
+  ],
+  "segmen": [
+    { "t": "Toko A menawarkan paket promo: Paket 1 (" },
+    { "t": "2 buku tulis", "peran": "data", "angka": 2, "var": "x" },
+    { "t": " + " },
+    { "t": "3 pensil", "peran": "data", "angka": 3, "var": "y" },
+    { "t": ") seharga " },
+    { "t": "Rp19.000", "peran": "data", "angka": 19000 },
+    { "t": ", dan Paket 2 (" },
+    { "t": "4 buku tulis", "peran": "data", "angka": 4, "var": "x" },
+    { "t": " + " },
+    { "t": "1 pensil", "peran": "data", "angka": 1, "var": "y" },
+    { "t": ") seharga " },
+    { "t": "Rp23.000", "peran": "data", "angka": 23000 },
+    { "t": ". Toko B menawarkan harga eceran tetap: " },
+    { "t": "Rp5.000 per buku tulis", "peran": "data", "angka": 5000 },
+    { "t": " dan " },
+    { "t": "Rp3.000 per pensil", "peran": "data", "angka": 3000 },
+    { "t": ". Rini ingin membeli " },
+    { "t": "3 buku tulis dan 3 pensil", "peran": "data", "angka": 3 },
+    { "t": ". Ia ingin mengeluarkan uang sesedikit mungkin. " },
+    { "t": "Di toko mana Rini sebaiknya membeli alat tulis tersebut?", "peran": "tanya" },
+    { "t": " Jelaskan alasan matematismu!" }
+  ],
+  "model": [[2, 3, 19000], [4, 1, 23000]],
+  "tahap": [
+    {
+      "no": 1, "judul": "Memahami masalah",
+      "layar": [
+        {
+          "id": "1a", "skor": 1, "input": "pilihan", "alat": [],
+          "instruksi": "Pilih rencana penyelesaian yang paling tepat.",
+          "opsi": [
+            { "id": "A", "teks": "Jumlahkan harga Paket 1 dan Paket 2, lalu bandingkan dengan Toko B." },
+            { "id": "B", "teks": "Cari harga satuan buku dan pensil di Toko A dengan SPLDV, hitung total 3 buku + 3 pensil di kedua toko, lalu bandingkan." },
+            { "id": "C", "teks": "Pilih Toko A karena promo pasti lebih murah." },
+            { "id": "D", "teks": "Bagi harga tiap paket dengan banyak barangnya." }
+          ],
+          "kunci": { "pilihan": "B" },
+          "petunjuk": [
+            "Apa yang perlu diketahui agar bisa membandingkan harga 3 buku + 3 pensil di dua toko?",
+            "Harga satuan di Toko A belum diketahui. Harga itu bisa dicari dari dua paket dengan SPLDV.",
+            "Jawaban B."
+          ],
+          "umpan_salah": {
+            "A": "Jumlah kedua paket berisi 6 buku + 4 pensil, bukan 3 buku + 3 pensil.",
+            "C": "Belum tentu! Keputusan perlu bukti hitungan.",
+            "D": "Satu paket berisi dua jenis barang dengan harga berbeda, jadi tidak bisa dibagi begitu saja."
+          },
+          "ringkasan": "Rencana: cari harga satuan di Toko A (SPLDV), lalu bandingkan total"
+        }
+      ]
+    },
+    {
+      "no": 2, "judul": "Menghitung harga satuan",
+      "layar": [
+        {
+          "id": "2a", "skor": 1, "jenis": "model", "input": "persamaan2", "alat": ["penerjemah"],
+          "instruksi": "Misalkan {x} = harga 1 buku tulis dan {y} = harga 1 pensil di Toko A. Susun dua persamaan.",
+          "kunci": {},
+          "petunjuk": [
+            "Satu paket menghasilkan satu persamaan.",
+            "Paket 1 berisi 2 buku dan 3 pensil seharga Rp19.000, jadi 2x + 3y = 19.000.",
+            "(1) 2x + 3y = 19.000   (2) 4x + y = 23.000"
+          ],
+          "umpan_salah": {
+            "kunci1": "Cek Paket 1: berapa buku, berapa pensil, dan berapa harganya?",
+            "kunci2": "Cek Paket 2: berapa buku, berapa pensil, dan berapa harganya?"
+          }
+        },
+        {
+          "id": "2b", "skor": 1, "input": "angka", "alat": ["tips", "penyelaras", "cek"],
+          "instruksi": "Selesaikan SPLDV-nya. Berapa harga satuan di Toko A?",
+          "template": "Harga 1 buku tulis ({x}) = Rp[x]\nHarga 1 pensil ({y}) = Rp[y]",
+          "kunci": { "nilai": { "x": 5000, "y": 3000 } },
+          "petunjuk": [
+            "Koefisien y di persamaan (2) adalah 1. Kamu bisa menulis y = 23.000 − 4x, atau pakai eliminasi.",
+            "Eliminasi y: (2) × 3 → 12x + 3y = 69.000, lalu dikurangi (1): 10x = 50.000.",
+            "x = 5.000 dan y = 3.000."
+          ],
+          "umpan_salah": { "y": "Nilai x sudah benar. Substitusikan x ke salah satu persamaan untuk mencari y." },
+          "ringkasan": "{x} = Rp5.000 ; {y} = Rp3.000"
+        },
+        {
+          "id": "2c", "skor": 0, "input": "angka", "alat": [],
+          "instruksi": "Hitung total harga 3 buku tulis + 3 pensil di setiap toko.",
+          "template": "Total di Toko A = Rp[totA]\nTotal di Toko B = Rp[totB]",
+          "kunci": { "nilai": { "totA": 24000, "totB": 24000 } },
+          "petunjuk": [
+            "Total = 3 × harga buku + 3 × harga pensil.",
+            "Toko A: 3(5.000) + 3(3.000). Toko B: 3(5.000) + 3(3.000).",
+            "Toko A = Rp24.000 dan Toko B = Rp24.000."
+          ],
+          "umpan_khusus": [
+            { "jika": { "totA": 42000 }, "pesan": "Rp42.000 adalah harga Paket 1 + Paket 2. Gunakan harga satuan: 3x + 3y." }
+          ],
+          "ringkasan": "Total: Toko A = Rp24.000 ; Toko B = Rp24.000"
+        }
+      ]
+    },
+    {
+      "no": 3, "judul": "Membandingkan",
+      "layar": [
+        {
+          "id": "3a", "skor": 1, "input": "pilihan", "alat": [],
+          "instruksi": "Bandingkan total biaya kedua toko.",
+          "opsi": [
+            { "id": "lebihmurahA", "teks": "Toko A lebih murah" },
+            { "id": "sama", "teks": "Biayanya sama" },
+            { "id": "lebihmurahB", "teks": "Toko B lebih murah" }
+          ],
+          "kunci": { "pilihan": "sama" },
+          "petunjuk": [
+            "Lihat Panel Ringkasan: berapa total di Toko A dan Toko B?",
+            "Keduanya Rp24.000.",
+            "Biayanya sama."
+          ],
+          "ringkasan": "Toko A (Rp24.000) = Toko B (Rp24.000)"
+        }
+      ]
+    },
+    {
+      "no": 4, "judul": "Keputusan",
+      "layar": [
+        {
+          "id": "4a", "skor": 1, "input": "pilihan", "alat": [],
+          "instruksi": "Di toko mana Rini sebaiknya membeli?",
+          "opsi": [
+            { "id": "A", "teks": "Di Toko A" },
+            { "id": "B", "teks": "Di Toko B" },
+            { "id": "AB", "teks": "Boleh di Toko A maupun Toko B" }
+          ],
+          "kunci": { "pilihan": "AB" },
+          "petunjuk": [
+            "Jika totalnya sama, apakah ada toko yang lebih hemat?",
+            "Tidak ada yang lebih hemat; pengeluarannya sama.",
+            "Boleh di Toko A maupun Toko B."
+          ],
+          "umpan_salah": {
+            "A": "Totalnya sama dengan Toko B, jadi Toko A tidak lebih hemat.",
+            "B": "Totalnya sama dengan Toko A, jadi Toko B tidak lebih hemat."
+          },
+          "ringkasan": "Keputusan: boleh di Toko A maupun Toko B"
+        }
+      ]
+    },
+    {
+      "no": 5, "judul": "Alasan matematis",
+      "layar": [
+        {
+          "id": "5a", "skor": 1, "input": "pilihan", "teks_opsional": true, "alat": [],
+          "instruksi": "Pilih alasan matematis yang paling tepat. Kamu juga boleh menulis alasan dengan kata-katamu sendiri.",
+          "opsi": [
+            { "id": "A", "teks": "Karena Toko A memberikan promo paket." },
+            { "id": "B", "teks": "Karena harga satuan hasil SPLDV di Toko A (buku Rp5.000, pensil Rp3.000) sama dengan harga eceran Toko B, sehingga total di kedua toko sama-sama Rp24.000." },
+            { "id": "C", "teks": "Karena Toko B tidak menjual paket." },
+            { "id": "D", "teks": "Karena Rp19.000 + Rp23.000 lebih dari Rp24.000." }
+          ],
+          "kunci": { "pilihan": "B" },
+          "petunjuk": [
+            "Alasan yang baik memakai hasil hitunganmu.",
+            "Bandingkan harga satuan di Toko A dengan harga eceran di Toko B.",
+            "Jawaban B."
+          ],
+          "ringkasan": "Alasan: harga satuan kedua toko sama, total sama-sama Rp24.000"
+        }
+      ]
+    }
+  ]
+}

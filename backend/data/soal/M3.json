@@ -1,0 +1,131 @@
+{
+  "id": "M3",
+  "mode": "misi",
+  "urutan": 3,
+  "judul": "Tiket Pentas Seni",
+  "indikator": "Employing Mathematical Concepts, Facts, and Procedures",
+  "variabel": [
+    { "simbol": "x", "arti": "banyak tiket VIP", "satuan": "lembar", "prefix": "" },
+    { "simbol": "y", "arti": "banyak tiket Reguler", "satuan": "lembar", "prefix": "" }
+  ],
+  "segmen": [
+    { "t": "Panitia pentas seni sekolah menjual dua jenis tiket: tiket kelas VIP dan tiket kelas Reguler. " },
+    { "t": "Total tiket yang terjual seluruhnya adalah 250 lembar", "peran": "data", "angka": 250 },
+    { "t": ". Harga " },
+    { "t": "tiket VIP adalah Rp50.000", "peran": "data", "angka": 50000, "var": "x" },
+    { "t": " per lembar dan " },
+    { "t": "tiket Reguler adalah Rp30.000", "peran": "data", "angka": 30000, "var": "y" },
+    { "t": " per lembar. " },
+    { "t": "Total pendapatan", "peran": "data" },
+    { "t": " yang diperoleh dari penjualan seluruh tiket tersebut adalah " },
+    { "t": "Rp8.900.000", "peran": "data", "angka": 8900000 },
+    { "t": ". " },
+    { "t": "Berapa banyak tiket VIP dan tiket Reguler yang masing-masing berhasil terjual?", "peran": "tanya" },
+    { "t": " Tunjukkan langkah perhitunganmu!" }
+  ],
+  "model": [[1, 1, 250], [50000, 30000, 8900000]],
+  "tahap": [
+    {
+      "no": 1, "judul": "Model SPLDV",
+      "layar": [
+        {
+          "id": "1a", "skor": 1, "jenis": "model", "input": "persamaan2", "alat": ["penerjemah"],
+          "instruksi": "Misalkan {x} = banyak tiket VIP dan {y} = banyak tiket Reguler. Susun dua persamaan.",
+          "kunci": {},
+          "petunjuk": [
+            "Ada dua informasi \"total\": total tiket dan total pendapatan.",
+            "Total tiket: x + y = 250. Total uang: (harga VIP × x) + (harga Reguler × y).",
+            "(1) x + y = 250   (2) 50.000x + 30.000y = 8.900.000"
+          ],
+          "umpan_salah": {
+            "kunci1": "Cek persamaan tentang total tiket: banyak VIP + banyak Reguler = …",
+            "kunci2": "Cek persamaan tentang uang: harga VIP dikali banyak tiket VIP, ditambah harga Reguler dikali banyak tiket Reguler."
+          },
+          "umpan_benar": "Tepat! Persamaan uang juga boleh disederhanakan (dibagi 10.000) menjadi 5x + 3y = 890."
+        }
+      ]
+    },
+    {
+      "no": 2, "judul": "Eliminasi",
+      "layar": [
+        {
+          "id": "2a", "skor": 1, "input": "pengali", "alat": [],
+          "instruksi": "Hilangkan {y}. Isi pengali tiap persamaan, lalu pilih operasinya.",
+          "kunci": { "hilangkan": "y" },
+          "petunjuk": [
+            "Lihat koefisien y di kedua persamaan. Bagaimana cara membuatnya sama besar?",
+            "Jika persamaan (2) ditulis 5x + 3y = 890, kalikan (1) dengan 3. Tandanya sama, jadi dikurangkan.",
+            "(1) × 3 → 3x + 3y = 750, (2) × 1, lalu dikurangkan."
+          ],
+          "ringkasan": "Koefisien {y} disamakan, lalu dikurangkan"
+        },
+        {
+          "id": "2b", "skor": 1, "input": "angka", "alat": [],
+          "instruksi": "Hitung {x}, banyak tiket VIP.",
+          "template": "{x} = [x] lembar",
+          "kunci": { "nilai": { "x": 70 } },
+          "petunjuk": [
+            "Setelah dikurangkan, hanya tersisa suku x.",
+            "(5x + 3y) − (3x + 3y) = 890 − 750 → 2x = 140.",
+            "x = 70"
+          ],
+          "umpan_khusus": [
+            { "jika": { "x": 140 }, "pesan": "140 adalah nilai 2x. Bagi dengan 2." }
+          ],
+          "ringkasan": "{x} = 70"
+        }
+      ]
+    },
+    {
+      "no": 3, "judul": "Substitusi",
+      "layar": [
+        {
+          "id": "3a", "skor": 1, "input": "substitusi", "alat": [],
+          "instruksi": "Substitusikan {x} = 70 ke salah satu persamaan.",
+          "kunci": { "var": "x", "nilai": 70 },
+          "petunjuk": [
+            "Pilih persamaan yang paling sederhana.",
+            "Persamaan (1): x + y = 250. Ganti x dengan 70.",
+            "70 + y = 250"
+          ],
+          "ringkasan": "70 + {y} = 250"
+        },
+        {
+          "id": "3b", "skor": 1, "input": "angka", "alat": ["cek"],
+          "instruksi": "Hitung {y}, lalu periksa dengan Cek Jawaban.",
+          "template": "{y} = [y] lembar",
+          "kunci": { "nilai": { "y": 180 } },
+          "petunjuk": [
+            "Pindahkan 70 ke ruas kanan.",
+            "y = 250 − 70.",
+            "y = 180"
+          ],
+          "umpan_khusus": [
+            { "jika": { "y": 320 }, "pesan": "Saat 70 pindah ruas, tandanya berubah: y = 250 − 70." }
+          ],
+          "ringkasan": "{y} = 180"
+        }
+      ]
+    },
+    {
+      "no": 4, "judul": "Kesimpulan",
+      "layar": [
+        {
+          "id": "4a", "skor": 1, "input": "angka", "alat": [],
+          "instruksi": "Jawab pertanyaan soal.",
+          "template": "Banyak tiket VIP = [vip] lembar\nBanyak tiket Reguler = [reg] lembar",
+          "kunci": { "nilai": { "vip": 70, "reg": 180 } },
+          "petunjuk": [
+            "Lihat lagi arti x dan y.",
+            "x = banyak tiket VIP, y = banyak tiket Reguler.",
+            "VIP 70 lembar, Reguler 180 lembar."
+          ],
+          "umpan_khusus": [
+            { "jika": { "vip": 180, "reg": 70 }, "pesan": "Tertukar! x adalah banyak tiket VIP." }
+          ],
+          "ringkasan": "Terjual 70 tiket VIP dan 180 tiket Reguler"
+        }
+      ]
+    }
+  ]
+}

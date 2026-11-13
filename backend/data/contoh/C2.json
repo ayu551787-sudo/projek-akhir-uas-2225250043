@@ -1,0 +1,67 @@
+{
+  "id": "C2",
+  "urutan": 2,
+  "judul": "Contoh 2 · Umur Ayah dan Rafi",
+  "deskripsi": "Memodelkan soal umur yang lebih sulit",
+  "variabel": ["x", "y"],
+  "soal": "Lima tahun lalu, umur ayah sama dengan 7 kali umur Rafi. Lima tahun lagi, umur ayah sama dengan 3 kali umur Rafi. Berapa umur ayah dan Rafi sekarang?",
+  "langkah": [
+    {
+      "judul": "1. Tentukan variabel (umur sekarang)",
+      "baris": [
+        "Misalkan {x} = umur ayah sekarang.",
+        "Misalkan {y} = umur Rafi sekarang."
+      ]
+    },
+    {
+      "judul": "2. Buat tabel waktu",
+      "baris": [
+        "Lima tahun lalu → ayah: {x} − 5, Rafi: {y} − 5",
+        "Sekarang → ayah: {x}, Rafi: {y}",
+        "Lima tahun lagi → ayah: {x} + 5, Rafi: {y} + 5"
+      ]
+    },
+    {
+      "judul": "3. Terjemahkan kalimat pertama",
+      "baris": [
+        "\"Lima tahun lalu, umur ayah = 7 kali umur Rafi\"",
+        "{x} − 5 = 7({y} − 5)",
+        "{x} − 5 = 7{y} − 35",
+        "{x} − 7{y} = −30  … persamaan (1)"
+      ]
+    },
+    {
+      "judul": "4. Terjemahkan kalimat kedua",
+      "baris": [
+        "\"Lima tahun lagi, umur ayah = 3 kali umur Rafi\"",
+        "{x} + 5 = 3({y} + 5)",
+        "{x} + 5 = 3{y} + 15",
+        "{x} − 3{y} = 10  … persamaan (2)"
+      ]
+    },
+    {
+      "judul": "5. Eliminasi {x}",
+      "baris": [
+        "Koefisien {x} sama-sama 1, tandanya sama → kurangkan.",
+        "({x} − 3{y}) − ({x} − 7{y}) = 10 − (−30)",
+        "4{y} = 40",
+        "{y} = 10"
+      ]
+    },
+    {
+      "judul": "6. Substitusi",
+      "baris": [
+        "{x} − 3(10) = 10",
+        "{x} = 40"
+      ]
+    },
+    {
+      "judul": "7. Nilai kewajaran",
+      "baris": [
+        "Lima tahun lalu: ayah 35, Rafi 5 → 35 = 7 × 5 ✓",
+        "Lima tahun lagi: ayah 45, Rafi 15 → 45 = 3 × 15 ✓",
+        "Umur ayah 40 tahun dan Rafi 10 tahun."
+      ]
+    }
+  ]
+}

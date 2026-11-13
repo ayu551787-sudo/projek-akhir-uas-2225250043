@@ -1,0 +1,186 @@
+{
+  "id": "L3",
+  "mode": "latihan",
+  "urutan": 3,
+  "judul": "Latihan 3 · Umur Ibu dan Sahi",
+  "indikator": "Soal cerita kompleks: menyusun model",
+  "variabel": [
+    { "simbol": "x", "arti": "umur ibu sekarang", "satuan": "tahun", "prefix": "" },
+    { "simbol": "y", "arti": "umur Sahi sekarang", "satuan": "tahun", "prefix": "" }
+  ],
+  "segmen": [
+    { "t": "Dua tahun lalu", "peran": "data", "angka": 2 },
+    { "t": ", umur ibu sama dengan " },
+    { "t": "6 kali umur Sahi", "peran": "data", "angka": 6 },
+    { "t": ". Jika " },
+    { "t": "18 tahun yang akan datang", "peran": "data", "angka": 18 },
+    { "t": " umur ibu menjadi " },
+    { "t": "2 kali umur anaknya", "peran": "data", "angka": 2 },
+    { "t": ". " },
+    { "t": "Berapakah umur ibu dan Sahi sekarang?", "peran": "tanya" }
+  ],
+  "model": [[1, -6, -10], [1, -2, 18]],
+  "tahap": [
+    {
+      "no": 1, "judul": "Persamaan pertama",
+      "layar": [
+        {
+          "id": "1a", "skor": 0, "input": "pilihan", "alat": [],
+          "instruksi": "Misalkan {x} = umur ibu sekarang. Dua tahun lalu, umur ibu adalah…",
+          "opsi": [
+            { "id": "A", "teks": "{x} − 2" },
+            { "id": "B", "teks": "{x} + 2" },
+            { "id": "C", "teks": "2{x}" },
+            { "id": "D", "teks": "{x} − 18" }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "Jika sekarang ibu berumur x tahun, dua tahun lalu umurnya lebih muda atau lebih tua?",
+            "Lebih muda 2 tahun, jadi dikurangi 2.",
+            "x − 2"
+          ],
+          "umpan_salah": {
+            "B": "x + 2 adalah umur ibu dua tahun LAGI. Dua tahun LALU umurnya berkurang.",
+            "C": "2x berarti dua kali umur ibu, bukan dua tahun lalu."
+          },
+          "ringkasan": "Dua tahun lalu: ibu {x} − 2, Sahi {y} − 2"
+        },
+        {
+          "id": "1b", "skor": 0, "input": "pilihan", "alat": [],
+          "instruksi": "Kalimat \"dua tahun lalu, umur ibu sama dengan 6 kali umur Sahi\" ditulis sebagai…",
+          "opsi": [
+            { "id": "A", "teks": "{x} − 2 = 6({y} − 2)" },
+            { "id": "B", "teks": "{x} − 2 = 6{y} − 2" },
+            { "id": "C", "teks": "6({x} − 2) = {y} − 2" },
+            { "id": "D", "teks": "{x} = 6{y}" }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "Umur Sahi dua tahun lalu juga harus dikurangi 2: y − 2.",
+            "\"6 kali umur Sahi (dua tahun lalu)\" berarti 6 dikali seluruh (y − 2).",
+            "x − 2 = 6(y − 2)"
+          ],
+          "umpan_salah": {
+            "B": "Hati-hati: 6 harus mengalikan seluruh (y − 2), jadi perlu tanda kurung.",
+            "C": "Terbalik. Yang 6 kali lebih besar adalah umur ibu.",
+            "D": "Ini umur sekarang, padahal kalimatnya tentang dua tahun lalu."
+          },
+          "ringkasan": "{x} − 2 = 6({y} − 2)"
+        },
+        {
+          "id": "1c", "skor": 0, "input": "persamaan1", "simpan_persamaan": 0, "alat": [],
+          "instruksi": "Rapikan {x} − 2 = 6({y} − 2) ke bentuk a{x} + b{y} = c.",
+          "kunci": { "persamaan": [1, -6, -10] },
+          "petunjuk": [
+            "Buka kurung dulu: 6(y − 2) = 6y − 12.",
+            "x − 2 = 6y − 12. Pindahkan 6y ke kiri (menjadi −6y) dan −2 ke kanan (menjadi +2).",
+            "x − 6y = −10"
+          ],
+          "umpan_salah": { "umum": "Belum tepat. Buka kurung 6(y − 2) dulu, lalu kumpulkan suku x dan y di ruas kiri." }
+        }
+      ]
+    },
+    {
+      "no": 2, "judul": "Persamaan kedua",
+      "layar": [
+        {
+          "id": "2a", "skor": 0, "input": "pilihan", "alat": [],
+          "instruksi": "Kalimat \"18 tahun yang akan datang, umur ibu menjadi 2 kali umur anaknya\" ditulis sebagai…",
+          "opsi": [
+            { "id": "A", "teks": "{x} + 18 = 2({y} + 18)" },
+            { "id": "B", "teks": "{x} + 18 = 2{y} + 18" },
+            { "id": "C", "teks": "2({x} + 18) = {y} + 18" },
+            { "id": "D", "teks": "{x} − 18 = 2({y} − 18)" }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "18 tahun lagi, umur ibu x + 18 dan umur Sahi y + 18.",
+            "\"2 kali umur anaknya\" berarti 2 dikali seluruh (y + 18).",
+            "x + 18 = 2(y + 18)"
+          ],
+          "umpan_salah": {
+            "B": "Angka 2 harus mengalikan seluruh umur Sahi saat itu, jadi pakai kurung: 2(y + 18).",
+            "D": "\"Akan datang\" berarti ditambah, bukan dikurangi."
+          },
+          "ringkasan": "{x} + 18 = 2({y} + 18)"
+        },
+        {
+          "id": "2b", "skor": 0, "input": "persamaan1", "simpan_persamaan": 1, "alat": [],
+          "instruksi": "Rapikan {x} + 18 = 2({y} + 18) ke bentuk a{x} + b{y} = c.",
+          "kunci": { "persamaan": [1, -2, 18] },
+          "petunjuk": [
+            "Buka kurung: 2(y + 18) = 2y + 36.",
+            "x + 18 = 2y + 36. Pindahkan 2y ke kiri dan 18 ke kanan.",
+            "x − 2y = 18"
+          ],
+          "umpan_salah": { "umum": "Belum tepat. Buka kurung 2(y + 18) dulu: hasilnya 2y + 36." }
+        }
+      ]
+    },
+    {
+      "no": 3, "judul": "Selesaikan",
+      "layar": [
+        {
+          "id": "3a", "skor": 0, "input": "pengali", "alat": ["penyelaras"],
+          "instruksi": "Hilangkan {x}. Isi pengali tiap persamaan, lalu pilih operasinya.",
+          "kunci": { "hilangkan": "x" },
+          "petunjuk": [
+            "Koefisien x di kedua persamaan sama-sama 1.",
+            "Pengalinya cukup 1 dan 1. Tandanya sama (+), jadi dikurangkan.",
+            "(1) × 1 dan (2) × 1, lalu dikurangkan."
+          ],
+          "ringkasan": "Dikurangkan: {x} hilang"
+        },
+        {
+          "id": "3b", "skor": 0, "input": "angka", "alat": [],
+          "instruksi": "Hitung umur Sahi sekarang.",
+          "template": "({x} − 6{y}) − ({x} − 2{y}) = −10 − 18\n{y} = [y] tahun",
+          "kunci": { "nilai": { "y": 7 } },
+          "petunjuk": [
+            "−6y − (−2y) = −4y, dan −10 − 18 = −28.",
+            "−4y = −28.",
+            "y = 7"
+          ],
+          "umpan_khusus": [
+            { "jika": { "y": -7 }, "pesan": "Periksa tanda: −4y = −28, jadi y = (−28) : (−4) = positif." }
+          ],
+          "ringkasan": "{y} = 7 tahun"
+        },
+        {
+          "id": "4a", "skor": 0, "input": "angka", "alat": ["cek"],
+          "instruksi": "Substitusikan {y} = 7 ke salah satu persamaan. Berapa umur ibu sekarang?",
+          "template": "{x} = [x] tahun",
+          "kunci": { "nilai": { "x": 32 } },
+          "petunjuk": [
+            "Pakai persamaan (2): x − 2y = 18.",
+            "x − 2(7) = 18 → x − 14 = 18.",
+            "x = 32"
+          ],
+          "ringkasan": "{x} = 32 tahun"
+        }
+      ]
+    },
+    {
+      "no": 4, "judul": "Nilai kewajaran",
+      "layar": [
+        {
+          "id": "5a", "skor": 0, "input": "pilihan", "alat": ["cek"],
+          "instruksi": "Ibu 32 tahun dan Sahi 7 tahun. Apakah hasil ini masuk akal?",
+          "opsi": [
+            { "id": "A", "teks": "Ya. Dua tahun lalu ibu 30 dan Sahi 5 (30 = 6 × 5). 18 tahun lagi ibu 50 dan Sahi 25 (50 = 2 × 25)." },
+            { "id": "B", "teks": "Tidak, umur ibu terlalu tua." },
+            { "id": "C", "teks": "Tidak bisa diperiksa." }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "Hitung umur keduanya dua tahun lalu dan 18 tahun lagi.",
+            "Dua tahun lalu: 30 dan 5. Delapan belas tahun lagi: 50 dan 25.",
+            "Jawaban A."
+          ],
+          "umpan_benar": "Hebat! Kamu sudah menilai kewajaran jawaban dengan kembali ke cerita soal.",
+          "ringkasan": "Masuk akal: 30 = 6 × 5 ✓, 50 = 2 × 25 ✓"
+        }
+      ]
+    }
+  ]
+}

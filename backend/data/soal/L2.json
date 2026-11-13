@@ -1,0 +1,86 @@
+{
+  "id": "L2",
+  "mode": "latihan",
+  "urutan": 2,
+  "judul": "Latihan 2 · Buku dan Pensil",
+  "indikator": "Soal cerita sederhana",
+  "variabel": [
+    { "simbol": "x", "arti": "harga 1 buku", "satuan": "", "prefix": "Rp" },
+    { "simbol": "y", "arti": "harga 1 pensil", "satuan": "", "prefix": "Rp" }
+  ],
+  "segmen": [
+    { "t": "Ajeng membeli " },
+    { "t": "4 buku", "peran": "data", "angka": 4, "var": "x" },
+    { "t": " dan " },
+    { "t": "1 pensil", "peran": "data", "angka": 1, "var": "y" },
+    { "t": " dengan harga " },
+    { "t": "Rp5.600", "peran": "data", "angka": 5600 },
+    { "t": ". Di toko yang sama, Ali membeli " },
+    { "t": "5 buku", "peran": "data", "angka": 5, "var": "x" },
+    { "t": " dan " },
+    { "t": "3 pensil", "peran": "data", "angka": 3, "var": "y" },
+    { "t": " dengan harga " },
+    { "t": "Rp8.400", "peran": "data", "angka": 8400 },
+    { "t": ". " },
+    { "t": "Berapa harga 1 buku dan 1 pensil?", "peran": "tanya" }
+  ],
+  "model": [[4, 1, 5600], [5, 3, 8400]],
+  "tahap": [
+    {
+      "no": 1, "judul": "Model matematika",
+      "layar": [
+        {
+          "id": "1a", "skor": 0, "jenis": "model", "input": "persamaan2", "alat": ["penerjemah"],
+          "instruksi": "Misalkan {x} = harga 1 buku dan {y} = harga 1 pensil. Susun dua persamaan dari soal.",
+          "kunci": {},
+          "petunjuk": [
+            "Setiap pembeli menghasilkan satu persamaan: (banyak buku)·x + (banyak pensil)·y = harga yang dibayar.",
+            "Ajeng: 4 buku dan 1 pensil seharga Rp5.600, jadi 4x + 1y = 5.600.",
+            "(1) 4x + y = 5.600   (2) 5x + 3y = 8.400"
+          ],
+          "umpan_salah": {
+            "kunci1": "Cek pembelian Ajeng: berapa buku, berapa pensil, dan berapa harganya?",
+            "kunci2": "Cek pembelian Ali: berapa buku, berapa pensil, dan berapa harganya?"
+          }
+        }
+      ]
+    },
+    {
+      "no": 2, "judul": "Selesaikan",
+      "layar": [
+        {
+          "id": "2a", "skor": 0, "input": "angka", "alat": ["tips", "penyelaras", "cek"],
+          "instruksi": "Selesaikan SPLDV-nya dengan metode pilihanmu. Pakai Tips Metode jika ragu.",
+          "template": "Harga 1 buku ({x}) = Rp[x]\nHarga 1 pensil ({y}) = Rp[y]",
+          "kunci": { "nilai": { "x": 1200, "y": 800 } },
+          "petunjuk": [
+            "Koefisien y di persamaan (1) adalah 1. Kamu bisa menulis y = 5.600 − 4x.",
+            "Substitusikan ke (2): 5x + 3(5.600 − 4x) = 8.400 → 5x + 16.800 − 12x = 8.400 → −7x = −8.400.",
+            "x = 1.200, lalu y = 5.600 − 4(1.200) = 800."
+          ],
+          "umpan_salah": {
+            "y": "Nilai x sudah benar. Substitusikan x ke persamaan (1) untuk mencari y."
+          },
+          "ringkasan": "{x} = Rp1.200 ; {y} = Rp800"
+        },
+        {
+          "id": "2b", "skor": 0, "input": "pilihan", "alat": [],
+          "instruksi": "Jawab pertanyaan soal: berapa harga 1 buku dan 1 pensil?",
+          "opsi": [
+            { "id": "A", "teks": "Harga 1 buku Rp1.200 dan harga 1 pensil Rp800" },
+            { "id": "B", "teks": "Harga 1 buku Rp800 dan harga 1 pensil Rp1.200" },
+            { "id": "C", "teks": "Harga 1 buku dan 1 pensil sama-sama Rp1.000" }
+          ],
+          "kunci": { "pilihan": "A" },
+          "petunjuk": [
+            "Lihat lagi apa arti x dan y.",
+            "x adalah harga buku, y adalah harga pensil.",
+            "Jawaban A."
+          ],
+          "umpan_salah": { "B": "Tertukar! x adalah harga buku, y adalah harga pensil." },
+          "ringkasan": "Jawab: buku Rp1.200, pensil Rp800"
+        }
+      ]
+    }
+  ]
+}
