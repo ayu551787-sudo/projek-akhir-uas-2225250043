@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelajah SPLDV - Aplikasi Pembelajaran Matematika</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e40af, var(--primary-color));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.75rem;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #334155;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Jelajah SPLDV</h1>
+        <p>Aplikasi web pembelajaran Sistem Persamaan Linear Dua Variabel</p>
+    </header>
+
+    <div class="container">
+        <!-- Deskripsi Aplikasi -->
+        <div class="card">
+            <h2>Tentang Aplikasi</h2>
+            <p>Aplikasi web pembelajaran Sistem Persamaan Linear Dua Variabel (SPLDV) untuk siswa SMP (kelas VIII–IX). Aplikasi ini dirancang untuk mengurangi beban kognitif <i>(cognitive load)</i> siswa sehingga kemampuan literasi matematika (matematika literasi) mereka berkembang.</p>
+            <p>Aplikasi dapat dibuka dari browser smartphone maupun laptop/PC.</p>
+            <p style="font-size: 0.9rem; color: #64748b; font-style: italic;">* Nama "Jelajah SPLDV" masih nama kerja dan dapat diganti.</p>
+        </div>
+
+        <!-- Latar Belakang -->
+        <div class="card">
+            <h2>Latar Belakang</h2>
+            <p>Perancangan aplikasi ini didasarkan pada wawancara analisis kebutuhan dengan siswa S01 (kelas IX, 6 November 2026)[cite: 2]. Kesimpulan utamanya:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Temuan Wawancara</th>
+                        <th>Jenis Beban</th>
+                        <th>Jawaban Aplikasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kesulitan memahami soal cerita yang panjang.</td>
+                        <td>Beban Asing (Extraneous)</td>
+                        <td>Menyediakan visualisasi interaktif dan ringkasan langkah demi langkah.</td>
+                    </tr>
+                    <tr>
+                        <td>Kebingungan dalam menentukan metode eliminasi atau substitusi.</td>
+                        <td>Beban Kognitif (Germane/Intrinsic)</td>
+                        <td>Panduan bertahap yang membimbing proses berpikir siswa.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tombol Interaktif / Simulasi -->
+        <div class="btn-container">
+            <a href="#" class="btn" onclick="alert('Fitur latihan soal akan segera dibuka!')">Mulai Belajar SPLDV</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - Proyek Akhir UAS | Pendidikan Matematika</p>
+    </footer>
+
+</body>
+</html>
