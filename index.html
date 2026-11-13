@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MathClas - Jelajah Math Seru (SPLDV)</title>
+
+    <!-- Konfigurasi PWA Agar Aplikasi Bisa Diinstal di HP -->
+    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22MathClas%22,%22short_name%22:%22MathClas%22,%22start_url%22:%22./index.html%22,%22display%22:%22standalone%22,%22background_color%22:%22#ffffff%22,%22theme_color%22:%22#6366f1%22}">
+
     <style>
         :root {
             --primary: #6366f1;
@@ -36,7 +40,7 @@
             flex-direction: column;
         }
 
-        /* HEADER & TOMBOL MUSIK DI ATAS */
+        /* HEADER & LOGO */
         header {
             background: linear-gradient(120deg, #4338ca, #7c3aed, #db2777);
             background-size: 200% 200%;
@@ -97,7 +101,6 @@
             text-transform: uppercase;
         }
 
-        /* Tombol Musik di Header (Aman & Tidak Menutupi Menu) */
         .music-control {
             background: rgba(255, 255, 255, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.6);
@@ -122,27 +125,28 @@
             border-color: var(--success);
         }
 
-        /* NAVIGASI BERSIH DAN AMAN DI KLIK */
+        /* NAVIGASI */
         nav {
             background: #ffffff;
             border-bottom: 2px solid var(--border);
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1rem;
+            gap: 0.4rem;
+            padding: 0.75rem 0.5rem;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
         }
 
         .nav-btn {
             background: #f1f5f9;
             border: 2px solid #cbd5e1;
             color: var(--text);
-            padding: 0.5rem 1rem;
+            padding: 0.45rem 0.85rem;
             border-radius: 999px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
@@ -201,6 +205,16 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        h3 {
+            color: #334155;
+            font-size: 1.05rem;
+            margin-top: 1.2rem;
+        }
+
+        p, li {
+            font-size: 0.95rem;
         }
 
         .feature-grid {
@@ -396,6 +410,35 @@
             display: none;
         }
 
+        .option-btn {
+            display: block;
+            width: 100%;
+            background: white;
+            border: 2px solid #cbd5e1;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 0.6rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+        .option-btn.selected-correct {
+            background: #d1fae5 !important;
+            border-color: #10b981 !important;
+            color: #065f46;
+        }
+        .option-btn.selected-wrong {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b;
+        }
+
         #confetti-canvas {
             position: fixed;
             top: 0;
@@ -419,7 +462,7 @@
 
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- HEADER DENGAN TOMBOL MUSIK DI ATAS -->
+    <!-- HEADER -->
     <header>
         <div class="logo-wrapper">
             <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -440,11 +483,13 @@
         </button>
     </header>
 
-    <!-- NAVIGASI AMAN & BISA DIPENCET -->
+    <!-- NAVIGASI -->
     <nav>
         <button class="nav-btn active" onclick="switchTab('beranda', this)">🏠 Beranda</button>
+        <button class="nav-btn" onclick="switchTab('materi', this)">📖 Materi</button>
         <button class="nav-btn" onclick="switchTab('kalkulator', this)">🧮 Simulasi</button>
         <button class="nav-btn" onclick="switchTab('latihan', this)">🎯 Tantangan</button>
+        <button class="nav-btn" onclick="switchTab('kuis', this)">📝 Kuis PG</button>
     </nav>
 
     <div class="container">
@@ -457,14 +502,14 @@
 
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <span class="feature-icon">🧩</span>
-                        <strong>Pecah Soal</strong>
-                        <p style="font-size:0.82rem; margin:0.3rem 0 0 0; color:var(--muted);">Informasi diringkas jadi poin jelas.</p>
+                        <span class="feature-icon">📖</span>
+                        <strong>Materi Ringkas</strong>
+                        <p style="font-size:0.82rem; margin:0.3rem 0 0 0; color:var(--muted);">Konsep dasar eliminasi & substitusi.</p>
                     </div>
                     <div class="feature-item">
                         <span class="feature-icon">⚡</span>
-                        <strong>Langkah Otomatis</strong>
-                        <p style="font-size:0.82rem; margin:0.3rem 0 0 0; color:var(--muted);">Simulasi alur eliminasi & substitusi.</p>
+                        <strong>Simulasi & Kuis</strong>
+                        <p style="font-size:0.82rem; margin:0.3rem 0 0 0; color:var(--muted);">Uji pemahaman dan latihan interaktif.</p>
                     </div>
                 </div>
             </div>
@@ -486,18 +531,40 @@
                         </tr>
                         <tr>
                             <td>Bingung menentukan langkah eliminasi/substitusi.</td>
-                            <td>Simulasi perhitungan interaktif bertahap.</td>
+                            <td>Simulasi perhitungan interaktif & rangkuman materi.</td>
                         </tr>
                     </tbody>
                 </table>
 
                 <div style="margin-top: 1.2rem; text-align: center;">
-                    <button class="btn btn-accent" onclick="switchTab('latihan', document.querySelectorAll('.nav-btn')[2])">Mulai Tantangan Sekarang 🚀</button>
+                    <button class="btn btn-accent" onclick="switchTab('materi', document.querySelectorAll('.nav-btn')[1])">Pelajari Materi Dulu 📖</button>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 2: KALKULATOR -->
+        <!-- TAB 2: MATERI SPLDV -->
+        <section id="materi" class="tab-section">
+            <div class="card">
+                <h2>📖 Ringkasan Materi SPLDV</h2>
+                <p><b>Sistem Persamaan Linear Dua Variabel (SPLDV)</b> adalah dua persamaan linear yang masing-masing memiliki dua variabel dan saling berkaitan. Bentuk umumnya:</p>
+                
+                <div style="background:#f1f5f9; padding: 0.8rem; border-radius: 8px; text-align: center; font-weight: bold; margin: 0.8rem 0; color: var(--primary-dark);">
+                    ax + by = c<br>dx + ey = f
+                </div>
+
+                <h3>1. Metode Eliminasi</h3>
+                <p>Metode ini dilakukan dengan cara <b>menghilangkan (mengeliminasi)</b> salah satu variabel untuk mendapatkan nilai variabel lainnya. Caranya dengan menyamakan koefisien variabel yang akan dihilangkan, lalu mengurangkan atau menjumlahkan kedua persamaan.</p>
+
+                <h3>2. Metode Substitusi</h3>
+                <p>Metode ini dilakukan dengan cara <b>memasukkan (mensubstitusi)</b> nilai salah satu variabel yang sudah diketahui dari satu persamaan ke persamaan lainnya.</p>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <button class="btn" onclick="switchTab('kalkulator', document.querySelectorAll('.nav-btn')[2])">Coba Kalkulator Simulasi 🧮</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: KALKULATOR -->
         <section id="kalkulator" class="tab-section">
             <div class="card">
                 <h2>🧮 Simulasi Penyelesai SPLDV</h2>
@@ -524,10 +591,10 @@
             </div>
         </section>
 
-        <!-- TAB 3: LATIHAN SOAL -->
+        <!-- TAB 4: LATIHAN SOAL CERITA -->
         <section id="latihan" class="tab-section">
             <div class="score-bar">
-                <span>🏆 <b>Poin:</b></span>
+                <span>🏆 <b>Poin Tantangan:</b></span>
                 <span class="score-badge" id="score-display">0 Poin</span>
             </div>
 
@@ -552,6 +619,26 @@
 
                 <div id="hint-box" class="hint-box"></div>
                 <div id="quiz-feedback" class="feedback"></div>
+            </div>
+        </section>
+
+        <!-- TAB 5: KUIS PILIHAN GANDA -->
+        <section id="kuis" class="tab-section">
+            <div class="score-bar">
+                <span>📝 <b>Kuis Pilihan Ganda</b></span>
+                <span class="score-badge" id="quiz-score">Skor: 0</span>
+            </div>
+
+            <div class="card">
+                <h3 id="pg-soal-title" style="margin-top:0; color:var(--primary);">Pertanyaan 1 dari 3</h3>
+                <p id="pg-soal-teks" style="font-weight:600; font-size:1.05rem;"></p>
+
+                <div id="pg-options-container"></div>
+                <div id="pg-feedback" class="feedback"></div>
+
+                <div style="margin-top: 1.2rem; text-align: right;">
+                    <button id="pg-next-btn" class="btn" style="display:none;" onclick="lanjutKuisPG()">Soal Berikutnya ➡️</button>
+                </div>
             </div>
         </section>
 
@@ -678,6 +765,7 @@
             document.getElementById('hasil-spldv').style.display = 'none';
         }
 
+        /* LATIHAN SOAL CERITA */
         const bankSoal = [
             {
                 judul: "Studi Kasus 1: Koperasi Sekolah 📚",
@@ -753,7 +841,96 @@
             muatSoal();
         }
 
+        /* KUIS PILIHAN GANDA */
+        const kuisPGData = [
+            {
+                tanya: "Himpunan penyelesaian dari sistem persamaan x + y = 5 dan x - y = 1 adalah...",
+                opsi: ["x = 3, y = 2", "x = 4, y = 1", "x = 2, y = 3", "x = 5, y = 0"],
+                benar: 0
+            },
+            {
+                tanya: "Jika diketahui 2x + y = 7 dan x + y = 4, maka nilai x dan y berturut-turut adalah...",
+                opsi: ["x = 1, y = 3", "x = 3, y = 1", "x = 2, y = 2", "x = 4, y = 0"],
+                benar: 1
+            },
+            {
+                tanya: "Metode manakah yang melibatkan proses menghilangkan salah satu variabel dengan menyamakan koefisiennya?",
+                opsi: ["Metode Substitusi", "Metode Grafik", "Metode Eliminasi", "Metode Campuran"],
+                benar: 2
+            }
+        ];
+
+        let indexKuisPG = 0;
+        let skorKuisPG = 0;
+        let kuisSudahDijawab = false;
+
+        function muatKuisPG() {
+            const data = kuisPGData[indexKuisPG];
+            kuisSudahDijawab = false;
+            document.getElementById('pg-soal-title').innerText = `Pertanyaan ${indexKuisPG + 1} dari ${kuisPGData.length}`;
+            document.getElementById('pg-soal-teks').innerText = data.tanya;
+            document.getElementById('pg-feedback').style.display = 'none';
+            document.getElementById('pg-next-btn').style.display = 'none';
+
+            const optContainer = document.getElementById('pg-options-container');
+            optContainer.innerHTML = '';
+
+            data.opsi.forEach((opsiTeks, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = String.fromCharCode(65 + idx) + ". " + opsiTeks;
+                btn.onclick = () => pilihJawabanPG(idx, btn);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function pilihJawabanPG(pilihanIdx, btnElement) {
+            if (kuisSudahDijawab) return;
+            kuisSudahDijawab = true;
+
+            const data = kuisPGData[indexKuisPG];
+            const allBtns = document.querySelectorAll('.option-btn');
+            const fb = document.getElementById('pg-feedback');
+            fb.style.display = 'block';
+
+            if (pilihanIdx === data.benar) {
+                playSFX('success');
+                btnElement.classList.add('selected-correct');
+                skorKuisPG += 50;
+                document.getElementById('quiz-score').innerText = `Skor: ${skorKuisPG}`;
+                fb.className = 'feedback correct';
+                fb.innerHTML = '🎉 <b>Hebat! Jawaban kamu benar! (+50 Poin)</b>';
+            } else {
+                playSFX('error');
+                btnElement.classList.add('selected-wrong');
+                allBtns[data.benar].classList.add('selected-correct');
+                fb.className = 'feedback wrong';
+                fb.innerHTML = '❌ <b>Kurang tepat.</b> Jawaban yang benar ditandai dengan warna hijau.';
+            }
+
+            allBtns.forEach(b => b.disabled = true);
+            document.getElementById('pg-next-btn').style.display = 'inline-block';
+        }
+
+        function lanjutKuisPG() {
+            playSFX('click');
+            indexKuisPG++;
+            if (indexKuisPG < kuisPGData.length) {
+                muatKuisPG();
+            } else {
+                document.getElementById('kuis').innerHTML = `
+                    <div class="card" style="text-align:center;">
+                        <h2>🏆 Kuis Selesai!</h2>
+                        <p style="font-size: 1.1rem; margin: 1rem 0;">Selamat, kamu telah menyelesaikan seluruh soal Kuis Pilihan Ganda MathClas.</p>
+                        <p style="font-size: 1.3rem; font-weight: bold; color: var(--primary);">Total Skor Kuis Kamu: ${skorKuisPG}</p>
+                        <button class="btn" style="margin-top:1rem;" onclick="location.reload()">Ulangi Kuis 🔄</button>
+                    </div>
+                `;
+            }
+        }
+
         muatSoal();
+        muatKuisPG();
     </script>
 
 </body>
