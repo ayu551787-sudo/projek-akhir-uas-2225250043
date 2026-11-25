@@ -1,0 +1,7 @@
+# Tema Algorika: selalu terang agar kartu Beranda dan teks tetap terbaca di HP yang memakai mode gelap.
+[theme]
+base = "light"
+primaryColor = "#2F5BEA"
+backgroundColor = "#ECEBF6"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1F2333"

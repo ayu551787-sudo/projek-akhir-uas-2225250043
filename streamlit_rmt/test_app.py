@@ -49,6 +49,7 @@ def test_contoh_soal_konsisten(contoh):
 
 def test_contoh_soal_tampil_bertahap():
     at = jalankan()
+    buka(at, "materi")
     at.button(key="lanjut_C1").click().run()
     assert at.session_state.tahap_C1 == 1
     at.button(key="semua_C1").click().run()
@@ -107,7 +108,7 @@ def test_menu_sely_tampil_tanpa_api_key(monkeypatch):
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     at = jalankan()
-    at.sidebar.radio(key="menu").set_value("👩‍🏫 Tanya Kak Sely").run()
+    buka(at, "sely")
     assert not at.exception, at.exception
     assert any("API key belum diatur" in i.value for i in at.info)
     assert at.button(key="foto_periksa").disabled   # belum ada foto
@@ -134,16 +135,43 @@ def jalankan():
     return at
 
 
-def test_semua_menu_tampil_tanpa_error():
+def buka(at, kunci):
+    """Buka menu lewat tombol di Beranda, seperti yang dilakukan siswa."""
+    if kunci == "sely":                               # Kak Sely dibuka lewat tombol melayang
+        at.button(key="fab_sely").click().run()
+    else:
+        if at.session_state.menu != "beranda":
+            at.button(key="ke_beranda").click().run()
+        at.button(key=f"buka_{kunci}").click().run()
+    assert at.session_state.menu == kunci and not at.exception, at.exception
+
+
+def test_beranda_dan_semua_menu_tanpa_error():
     at = jalankan()
-    for menu in at.sidebar.radio(key="menu").options:
-        at.sidebar.radio(key="menu").set_value(menu).run()
-        assert not at.exception, (menu, at.exception)
+    assert at.session_state.menu == "beranda"
+    assert len(at.sidebar) == 0                      # tidak ada menu di samping
+    for kunci in [*app.MENU, "sely"]:
+        buka(at, kunci)
+    at.button(key="ke_beranda").click().run()
+    assert at.session_state.menu == "beranda"
+
+
+def test_tombol_tanya_kak_sely_tersembunyi_saat_kuis():
+    at = jalankan()
+    assert any(b.key == "fab_sely" for b in at.button)
+    buka(at, "kuis")
+    at.text_input(key="input_nama").input("Siswa Uji").run()
+    next(b for b in at.button if "Mulai Kuis" in b.label).click().run()
+    assert at.session_state.kuis_tahap == "ujian"
+    assert not any(b.key == "fab_sely" for b in at.button)   # tidak bisa bertanya ke AI saat ujian
+    at.button(key="ke_beranda").click().run()
+    assert any(b.key == "lanjut_kuis" for b in at.button)
+    assert any("Halo, Siswa Uji" in m.value for m in at.markdown)
 
 
 def test_kalkulator_hipotesis():
     at = jalankan()
-    at.sidebar.radio(key="menu").set_value("📈 Eksplorasi Grafik & Kalkulator").run()
+    buka(at, "grafik")
     assert any("hipotesis" in i.value for i in at.info)
     at.radio(key="hipotesis").set_value("berpotongan (satu penyelesaian)").run()
     assert any("x = 3, y = 2" in s.value for s in at.success)
@@ -151,7 +179,7 @@ def test_kalkulator_hipotesis():
 
 def test_latihan_periksa_dan_petunjuk():
     at = jalankan()
-    at.sidebar.radio(key="menu").set_value("✍️ Latihan Soal Mandiri").run()
+    buka(at, "latihan")
     at.selectbox(key="pilih_latihan").set_value(2).run()          # L3 substitusi
     at.number_input(key="lat_L3_x").set_value(7)
     at.number_input(key="lat_L3_y").set_value(3)
@@ -163,12 +191,13 @@ def test_latihan_periksa_dan_petunjuk():
 
 def test_kuis_alur_lengkap():
     at = jalankan()
-    at.sidebar.radio(key="menu").set_value("🎯 Kuis Evaluasi").run()
-    at.button[0].click().run()                                     # tanpa nama
+    buka(at, "kuis")
+    mulai = lambda: next(b for b in at.button if "Mulai Kuis" in b.label)
+    mulai().click().run()                                          # tanpa nama
     assert any("Isi nama" in w.value for w in at.warning)
     at.text_input(key="input_nama").input("Siswa Uji").run()
     at.toggle(key="toggle_timer").set_value(False).run()
-    at.button[0].click().run()
+    mulai().click().run()
     assert at.session_state.kuis_tahap == "ujian"
     for i, q in enumerate(app.KUIS):
         nilai = q["kunci"] if i < 8 else (q["kunci"] + 1) % len(q["opsi"])

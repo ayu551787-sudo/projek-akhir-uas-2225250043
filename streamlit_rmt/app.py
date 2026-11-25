@@ -73,6 +73,49 @@ CSS = """
 .vx {color:#1D6FD8; font-weight:700; font-style:italic;}
 .vy {color:#C2410C; font-weight:700; font-style:italic;}
 .timer {font-size:1.6rem; font-weight:700; font-variant-numeric:tabular-nums;}
+
+/* ---------- Latar & Beranda bergaya kartu ---------- */
+.stApp {background: linear-gradient(180deg, #ECEBF6 0%, #DEDFEC 100%);}
+.stMainBlockContainer {padding-bottom: 7rem;}   /* ruang agar tombol melayang tidak menutupi isi */
+.stMainBlockContainer h1 {font-size: 1.75rem;}
+.stMainBlockContainer:has(.st-key-beranda) {max-width: 460px; padding-top: 4.5rem;}
+.beranda-judul {font-size: 1.35rem; font-weight: 700; color: #1F2333; margin: 0;}
+.beranda-sub {font-size: 0.8rem; color: #5B6070; margin: 0 0 6px 0;}
+
+[class*="st-key-kartu_"] {position: relative; margin-bottom: 12px;}
+.kartu-menu {display: flex; align-items: center; gap: 14px; padding: 18px 18px;
+             border-radius: 18px; background: rgba(255,255,255,0.78);
+             border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 2px 10px rgba(60,60,110,0.06);}
+.kartu-menu.teal {background: #D6ECEC;}
+.kartu-menu .km-isi {flex: 1; min-width: 0;}
+.kartu-menu .km-ikon {width: 46px; height: 46px; border-radius: 12px; background: #FFFFFF;
+                      display: flex; align-items: center; justify-content: center; color: #1F2333;
+                      box-shadow: 0 1px 4px rgba(60,60,110,0.08); margin-bottom: 14px;}
+.kartu-menu .km-judul {font-weight: 700; color: #1F2333; font-size: 1rem;}
+.kartu-menu .km-desk {color: #5B6070; font-size: 0.82rem; margin-top: 2px;}
+.kartu-menu .km-panah {color: #5B6070; flex: none;}
+/* Tombol transparan menutupi seluruh kartu, sehingga kartu bisa diklik. */
+[class*="st-key-buka_"] {position: absolute !important; top: 0; left: 0; z-index: 2; margin: 0 !important;
+                         width: 100% !important; height: 100% !important;}
+[class*="st-key-buka_"] .stButton, [class*="st-key-buka_"] button {width: 100% !important; height: 100% !important;}
+[class*="st-key-buka_"] button {opacity: 0; cursor: pointer;}
+[class*="st-key-kartu_"]:hover .kartu-menu {box-shadow: 0 6px 18px rgba(60,60,110,0.14);}
+[class*="st-key-kartu_"]:focus-within .kartu-menu {outline: 3px solid #2F5BEA; outline-offset: 2px;}
+
+/* Tombol kembali ke Beranda */
+.st-key-ke_beranda button {background: transparent; border: none; color: #2F5BEA;
+                           padding: 0; min-height: 0; font-weight: 600;}
+
+/* Tombol melayang "Tanya Kak Sely" */
+.st-key-fab_sely {position: fixed !important; right: 16px; bottom: 24px; z-index: 1000; width: auto !important;}
+.st-key-fab_sely button {position: relative; background: #2F5BEA; color: #FFFFFF; border: none;
+                         border-radius: 16px; padding: 10px 16px; font-weight: 700;
+                         box-shadow: 0 8px 20px rgba(47,91,234,0.35);}
+.st-key-fab_sely button:hover {background: #2449C7; color: #FFFFFF;}
+.st-key-fab_sely button::after {content: "?"; position: absolute; top: -8px; right: -8px;
+                                width: 20px; height: 20px; border-radius: 50%; background: #F59E0B;
+                                color: #FFFFFF; font-size: 12px; font-weight: 700; line-height: 20px;
+                                text-align: center;}
 </style>
 """
 
@@ -1502,37 +1545,77 @@ def menu_sely() -> None:
 # =============================================================================
 # 12. KERANGKA APLIKASI
 # =============================================================================
+def _svg(isi: str) -> str:
+    """Ikon garis sederhana (gaya Lucide) yang mengikuti warna teks."""
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" '
+            'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" '
+            f'aria-hidden="true">{isi}</svg>')
+
+
+IKON = {
+    "buku": _svg('<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>'),
+    "kalkulator": _svg('<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/>'
+                       '<path d="M16 14v4M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/>'),
+    "pensil": _svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>'),
+    "target": _svg('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>'),
+    "panah": _svg('<path d="m9 18 6-6-6-6"/>'),
+}
+
+# Menu utama di Beranda: kunci -> (ikon, judul, deskripsi, warna kartu). Kak Sely dibuka lewat tombol melayang.
+MENU = {
+    "materi": ("buku", "Belajar Materi", "Bentuk umum, metode penyelesaian, dan contoh soal cerita", ""),
+    "grafik": ("kalkulator", "Kalkulator & Grafik SPLDV", "Cari x dan y dengan langkah runtut dan grafik", ""),
+    "latihan": ("pensil", "Latihan Mandiri", "Tujuh soal dengan petunjuk bertahap dan pembahasan", ""),
+    "kuis": ("target", "Kuis Evaluasi", "Sepuluh soal, timer, dan rapor hasil", "teal"),
+}
+
+
+def buka_menu(kunci: str) -> None:
+    st.session_state.menu = kunci
+
+
+def kartu_menu(kunci: str, ikon: str, judul: str, deskripsi: str, warna: str) -> None:
+    with st.container(key=f"kartu_{kunci}"):
+        st.markdown(
+            f'<div class="kartu-menu {warna}"><div class="km-isi"><div class="km-ikon">{IKON[ikon]}</div>'
+            f'<div class="km-judul">{judul}</div><div class="km-desk">{deskripsi}</div></div>'
+            f'<div class="km-panah">{IKON["panah"]}</div></div>', unsafe_allow_html=True)
+        st.button(judul, key=f"buka_{kunci}", on_click=buka_menu, args=(kunci,))
+
+
+def menu_beranda() -> None:
+    with st.container(key="beranda"):
+        nama = st.session_state.kuis_nama
+        sapaan = f"Halo, {nama}" if nama else f"Belajar SPLDV bersama {NAMA_AI}"
+        st.markdown(f'<p class="beranda-judul">Algorika</p><p class="beranda-sub">{sapaan}</p>',
+                    unsafe_allow_html=True)
+        if st.session_state.kuis_tahap == "ujian":
+            st.warning("Kuis sedang berlangsung. Lanjutkan sebelum waktunya habis.")
+            st.button("▶ Lanjutkan kuis", key="lanjut_kuis", type="primary", width="stretch",
+                      on_click=buka_menu, args=("kuis",))
+        for kunci, (ikon, judul, deskripsi, warna) in MENU.items():
+            kartu_menu(kunci, ikon, judul, deskripsi, warna)
+
+
 def main() -> None:
-    st.set_page_config(page_title="Algorika", page_icon="📐", layout="wide")
+    st.set_page_config(page_title="Algorika", page_icon="📐", layout="centered",
+                       initial_sidebar_state="collapsed")
     st.markdown(CSS, unsafe_allow_html=True)
     init_state()
+    menu = st.session_state.setdefault("menu", "beranda")
 
-    with st.sidebar:
-        st.markdown("## 📐 Algorika")
-        st.caption("Belajar Sistem Persamaan Linear Dua Variabel (SPLDV) bersama asisten AI Kak Sely")
-        menu = st.radio("Menu", ["📘 Materi Pembelajaran", "📈 Eksplorasi Grafik & Kalkulator",
-                                 "✍️ Latihan Soal Mandiri", "🎯 Kuis Evaluasi",
-                                 f"{AVATAR_AI} Tanya {NAMA_AI}"], key="menu")
-        st.divider()
-        st.markdown("**Fase RMT**")
-        for no in (1, 2, 3):
-            st.caption(f"{FASE_RMT[no][0]}: {FASE_RMT[no][1]}")
-        st.divider()
-        st.markdown(f"<span class='vx'>x</span> selalu biru · <span class='vy'>y</span> selalu oranye",
-                    unsafe_allow_html=True)
-        if st.session_state.kuis_tahap == "ujian" and not menu.startswith("🎯"):
-            st.warning("Kuis sedang berlangsung. Kembali ke menu Kuis Evaluasi.")
+    # Tombol melayang "Tanya Kak Sely": disembunyikan saat kuis berlangsung dan di halaman Kak Sely sendiri.
+    if menu != "sely" and st.session_state.kuis_tahap != "ujian":
+        st.button(f"Tanya {NAMA_AI}", key="fab_sely", icon=":material/forum:",
+                  on_click=buka_menu, args=("sely",))
 
-    if menu.startswith("📘"):
-        menu_materi()
-    elif menu.startswith("📈"):
-        menu_grafik()
-    elif menu.startswith("✍️"):
-        menu_latihan()
-    elif menu.startswith("🎯"):
-        menu_kuis()
-    else:
-        menu_sely()
+    if menu == "beranda":
+        menu_beranda()
+        return
+
+    st.button("← Beranda", key="ke_beranda", on_click=buka_menu, args=("beranda",))
+    {"materi": menu_materi, "grafik": menu_grafik, "latihan": menu_latihan,
+     "kuis": menu_kuis, "sely": menu_sely}.get(menu, menu_beranda)()
 
 
 if __name__ == "__main__":
