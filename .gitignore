@@ -5,3 +5,8 @@ __pycache__/
 backend/app.db
 *.db
 node_modules/
+
+# Rahasia (API key)
+.streamlit/secrets.toml
+streamlit_rmt/.streamlit/secrets.toml
+.env
